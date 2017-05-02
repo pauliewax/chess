@@ -43,6 +43,11 @@ class Board
       raise MovementError.new("Not a valid move")
     end
   end
+
+  def in_bounds?(pos)
+    pos.all? { |coord| (coord <= 7) && (coord >= 0) }
+  end
+
 end
 
 class MovementError < StandardError; end

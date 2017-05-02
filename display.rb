@@ -19,25 +19,22 @@ class Display
   end
 
   def render
-    selectedX, selectedY = cursor.cursor_pos
-    divider = "\n-------------------------------"
+    selected_row, selected_col = cursor.cursor_pos
+    divider = "\n-----------------------------------"
     rendered_rows = board.grid.map.with_index do |row, row_num|
-      if row_num == selectedX
-        render_row(row, selectedY) + divider
-      else
-        render_row(row) + divider
-      end
+      to_render = (row_num == selected_row ? [row, selected_col] : [row, nil])
+      "#{row_num} |" + render_row(*to_render) + "|" + divider
     end.join("\n")
-
-    top_row = "-------------------------------\n"
-    puts [top_row, rendered_rows].join
+    num_row = "    0   1   2   3   4   5   6   7\n"
+    top_row = "-----------------------------------\n"
+    puts [num_row, top_row, rendered_rows].join
   end
 
-  def render_row(row, selectedY = nil)
+  def render_row(row, selected_col)
     row_chars = row.map.with_index do |square, col_num|
-      if col_num == selectedY && cursor.selected == true
+      if col_num == selected_col && cursor.selected == true
         square.nil? ? " O ".green : " X ".green
-      elsif col_num == selectedY
+      elsif col_num == selected_col
         square.nil? ? " O ".red : " X ".red
       else
         square.nil? ? " O " : " X "

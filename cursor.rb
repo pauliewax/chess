@@ -97,6 +97,6 @@ class Cursor
     xC, yC = cursor_pos
     xD, yD = diff
     xN, yN = (xC + xD), (yC  + yD)
-    @cursor_pos = [xN, yN]
+    @cursor_pos = [xN, yN] if board.in_bounds?([xN, yN])
   end
 end
