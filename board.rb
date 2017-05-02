@@ -26,7 +26,7 @@ class Board
         pos = [row_num, col_num]
         occupied_rows = [0, 1, 6, 7]
         if occupied_rows.include?(row_num)
-          self[pos] = Piece.new
+          self[pos] = Piece.new(nil, pos)
         end
       end
     end
@@ -51,3 +51,7 @@ class Board
 end
 
 class MovementError < StandardError; end
+
+b = Board.new
+rooky = Rook.new(b, [1,0])
+p rooky.horizontal_dirs

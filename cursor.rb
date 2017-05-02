@@ -94,9 +94,9 @@ class Cursor
   end
 
   def update_pos(diff)
-    xC, yC = cursor_pos
-    xD, yD = diff
-    xN, yN = (xC + xD), (yC  + yD)
-    @cursor_pos = [xN, yN] if board.in_bounds?([xN, yN])
+    x, y = cursor_pos
+    dx, dy = diff
+    x2, y2 = (x + dx), (y + dy)
+    @cursor_pos = [x2, y2] if board.in_bounds?([x2, y2])
   end
 end

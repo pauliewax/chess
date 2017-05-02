@@ -48,5 +48,4 @@ end
 
 b = Board.new
 disp = Display.new(b)
-
 disp.show
