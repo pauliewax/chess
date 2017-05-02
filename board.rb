@@ -3,7 +3,7 @@ require 'byebug'
 
 class Board
 
-  attr_accessor :grid
+  attr_reader :grid
 
   def initialize
     @grid = Array.new(8) { Array.new(8) }
@@ -43,7 +43,6 @@ class Board
       raise MovementError.new("Not a valid move")
     end
   end
-
 end
 
 class MovementError < StandardError; end
