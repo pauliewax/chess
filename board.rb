@@ -11,12 +11,12 @@ class Board
   end
 
   def []=(pos, piece)
-    x,y = pos
+    x, y = pos
     grid[x][y] = piece
   end
 
   def [](pos)
-    x,y = pos
+    x, y = pos
     grid[x][y]
   end
 
@@ -33,8 +33,17 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
+    move_errors(start_pos, end_pos)
     self[end_pos] = self[start_pos]
     self[start_pos] = nil
   end
 
+  def move_errors(start_pos, end_pos)
+    if self[start_pos].nil? ||  !(self[end_pos].nil?)
+      raise MovementError.new("Not a valid move")
+    end
+  end
+
 end
+
+class MovementError < StandardError; end
