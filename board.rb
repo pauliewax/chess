@@ -26,19 +26,21 @@ class Board
         pos = [row_num, col_num]
         occupied_rows = [0, 1, 6, 7]
         if occupied_rows.include?(row_num)
-          self[pos] = Piece.new(nil, pos)
+          self[pos] = Piece.new(nil, :red, pos)
+        else
+          self[pos] = NullPiece.instance
         end
       end
     end
   end
 
   def move_piece(start_pos, end_pos)
-    move_errors(start_pos, end_pos)
+    move_errors?(start_pos, end_pos)
     self[end_pos] = self[start_pos]
     self[start_pos] = nil
   end
 
-  def move_errors(start_pos, end_pos)
+  def move_errors?(start_pos, end_pos)
     if self[start_pos].nil? ||  !(self[end_pos].nil?)
       raise MovementError.new("Not a valid move")
     end
@@ -53,5 +55,5 @@ end
 class MovementError < StandardError; end
 
 b = Board.new
-rooky = Rook.new(b, [1,0])
-p rooky.horizontal_dirs
+kingo = Rook.new(b, :red, [1,0])
+p kingo.moves
